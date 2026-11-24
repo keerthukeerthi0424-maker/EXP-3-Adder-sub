@@ -61,7 +61,7 @@ module half_adder_tb;
 endmodule
 
 ```
-Verilog Program(Half-Subtractor)
+###Verilog Program(Half-Subtractor)
 ```verilog
 module half_subtractor (
     input  wire A,
@@ -73,7 +73,7 @@ module half_subtractor (
     assign Borrow = (~A) & B;   // A' . B
 endmodule
 ```
-Testbench Program(Half-Subtractor)
+###Testbench Program(Half-Subtractor)
 
 ```verilog
 module half_subtractor_tb;
