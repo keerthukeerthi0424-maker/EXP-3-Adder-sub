@@ -17,8 +17,8 @@ File name	Purpose
 half_add_sub.v	Arithmetic-circuit RTL
 half_add_sub_tb.v	Stimulus and VCD generation
 
-### Verilog Program
-```
+### Verilog Program(Half-Adder)
+```verilog
 module half_adder (
     input  wire A,
     input  wire B,
@@ -29,8 +29,8 @@ module half_adder (
     assign Carry = A & B;   // AND
 endmodule
 ```
-### Testbench Program
-```
+### Testbench Program(Half-Adder)
+```verilog
 module half_adder_tb;
     reg A, B;
     wire Sum, Carry;
@@ -62,7 +62,7 @@ endmodule
 
 ```
 Verilog Program(Half-Subtractor)
-```
+```verilog
 module half_subtractor (
     input  wire A,
     input  wire B,
@@ -75,7 +75,7 @@ endmodule
 ```
 Testbench Program(Half-Subtractor)
 
-```
+```verilog
 module half_subtractor_tb;
     reg A, B;
     wire Diff, Borrow;
