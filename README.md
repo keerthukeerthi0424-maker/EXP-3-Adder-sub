@@ -19,10 +19,92 @@ half_add_sub_tb.v	Stimulus and VCD generation
 
 ### Verilog Program
 ```
+module half_adder (
+    input  wire A,
+    input  wire B,
+    output wire Sum,
+    output wire Carry
+);
+    assign Sum   = A ^ B;   // XOR
+    assign Carry = A & B;   // AND
+endmodule
 ```
 ### Testbench Program
+```
+module half_adder_tb;
+    reg A, B;
+    wire Sum, Carry;
 
+    // Instantiate the Half Adder
+    half_adder ha_uut (
+        .A(A),
+        .B(B),
+        .Sum(Sum),
+        .Carry(Carry)
+    );
 
+    initial begin
+        // ---- VCD dump setup ----
+        $dumpfile("half_adder.vcd");      // name of the VCD file to be generated
+        $dumpvars(0, half_adder_tb);      // dump all signals in this testbench hierarchy
+
+        // ---- Apply all 4 input combinations ----
+        $monitor("Time=%0t A=%b B=%b | Sum=%b Carry=%b", $time, A, B, Sum, Carry);
+        
+        A = 0; B = 0; #10;
+        A = 0; B = 1; #10;
+        A = 1; B = 0; #10;
+        A = 1; B = 1; #10;
+
+        #10 $finish;
+    end
+endmodule
+
+```
+Verilog Program(Half-Subtractor)
+```
+module half_subtractor (
+    input  wire A,
+    input  wire B,
+    output wire Diff,
+    output wire Borrow
+);
+    assign Diff   = A ^ B;      // XOR
+    assign Borrow = (~A) & B;   // A' . B
+endmodule
+```
+Testbench Program(Half-Subtractor)
+
+```
+module half_subtractor_tb;
+    reg A, B;
+    wire Diff, Borrow;
+
+    // Instantiate the Half Subtractor
+    half_subtractor hs_uut (
+        .A(A),
+        .B(B),
+        .Diff(Diff),
+        .Borrow(Borrow)
+    );
+
+    initial begin
+        // ---- VCD dump setup ----
+        $dumpfile("half_subtractor.vcd"); // name of the VCD file to be generated
+        $dumpvars(0, half_subtractor_tb); // dump all signals in this testbench hierarchy
+
+        // ---- Apply all 4 input combinations ----
+        $monitor("Time=%0t A=%b B=%b | Diff=%b Borrow=%b", $time, A, B, Diff, Borrow);
+        
+        A = 0; B = 0; #10;
+        A = 0; B = 1; #10;
+        A = 1; B = 0; #10;
+        A = 1; B = 1; #10;
+
+        #10 $finish;
+    end
+endmodule
+```
 ### Truth Table
 
 
@@ -84,6 +166,12 @@ The Half Adder and Half Subtractor were realized using Verilog HDL:
 The design was compiled and simulated using Synopsys VCS, and the functionality was verified using DVE waveform analysis, matching the expected truth table.
 
 ### Output
+output for Half adder
+
+<img width="1920" height="1080" alt="Screenshot (10)" src="https://github.com/user-attachments/assets/252eb086-0716-443c-8e7a-df99b2af5ef8" />
+
+output for half subractor
+<img width="1920" height="1080" alt="Screenshot (11)" src="https://github.com/user-attachments/assets/6c1dc61a-bf34-4e0f-840e-e078c10ee868" />
 
 
 ### Viva-Voce Questions
